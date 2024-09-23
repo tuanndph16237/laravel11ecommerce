@@ -693,7 +693,7 @@
             <div class="product-card product-card_style3 mb-3 mb-md-4 mb-xxl-5">
               <div class="pc__img-wrapper">
                 <a href="details.html">
-                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-6.jpg') }}assets/images/home/demo3/product-6.jpg" width="330" height="400"
+                  <img loading="lazy" src="{{ asset('assets/images/home/demo3/product-6.jpg') }}" width="330" height="400"
                     alt="Cropped Faux leather Jacket" class="pc__img">
                 </a>
                 <div class="product-label text-uppercase bg-white top-0 left-0 mt-2 mx-2">New</div>
