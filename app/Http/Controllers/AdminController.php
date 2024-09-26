@@ -254,7 +254,7 @@ public function delete_category($id)
 }
 public function GenerateProductThumbnailImage($image, $imageName)
     {
-        $destinationPath = public_path('uploads/products/thumbnails');
+        $destinationPath = public_path('uploads/products');
         $destinationPathThumbnail = public_path('uploads/products/thumbnails');
         $img = Image::read($image->path());
         $img->cover(540,689,"top");
