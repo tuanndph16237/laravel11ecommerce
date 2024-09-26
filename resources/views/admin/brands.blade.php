@@ -109,7 +109,7 @@
                 var selectedForm = $(this).closest('form');
                 swal({
                     title: "Are you sure?",
-                    text: "You want to delete this record?",
+                    text: "You want to delete this brand?",
                     type: "warning",
                     buttons: ["No!", "Yes!"],
                     confirmButtonColor: '#dc3545'
