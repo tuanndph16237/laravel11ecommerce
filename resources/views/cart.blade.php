@@ -10,27 +10,33 @@
         font-weight: bold;
         font-size: 21px !important;
     }
+    .text-success{
+        color: #27Bc04 !important;
+    }
+    .text-danger{
+        color: #d61808 !important;
+    }
 </style>
 <main class="pt-90">
     <div class="mb-4 pb-4"></div>
     <section class="shop-checkout container">
         <h2 class="page-title">Cart</h2>
         <div class="checkout-steps">
-            <a href="javascript:void();" class="checkout-steps__item active">
+            <a href="javascript:void(0);" class="checkout-steps__item active">
                 <span class="checkout-steps__item-number">01</span>
                 <span class="checkout-steps__item-title">
                     <span>Shopping Bag</span>
                     <em>Manage Your Items List</em>
                 </span>
             </a>
-            <a href="javascript:void();" class="checkout-steps__item">
+            <a href="javascript:void(0);" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">02</span>
                 <span class="checkout-steps__item-title">
                     <span>Shipping and Checkout</span>
                     <em>Checkout Your Items List</em>
                 </span>
             </a>
-            <a href="javascript:void();" class="checkout-steps__item">
+            <a href="javascript:void(0);" class="checkout-steps__item">
                 <span class="checkout-steps__item-number">03</span>
                 <span class="checkout-steps__item-title">
                     <span>Confirmation</span>
@@ -107,46 +113,99 @@
                     </tbody>
                 </table>
                 <div class="cart-table-footer">
-                    <form class="position-relative bg-body">
-                        <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code">
-                        <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APPLY COUPON">
-                    </form>
+                    @if(!Session::has("coupon"))
+        <form class="position-relative bg-body" method="POST" action="{{route('cart.coupon.apply')}}">
+            @csrf
+            <input class="form-control" type="text" name="coupon_code" placeholder="Coupon Code">
+            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4" type="submit" value="APPLY COUPON">
+        </form>
+    @else
+        <form class="position-relative bg-body" method="POST" action="{{route('cart.coupon.remove')}}">
+            @csrf
+            @method('DELETE')
+            <input class="form-control text-success fw-bold" type="text" name="coupon_code" placeholder="Coupon Code" value="{{session()->get('coupon')['code']}} Applied!" readonly>
+            <input class="btn-link fw-medium position-absolute top-0 end-0 h-100 px-4 text-danger" type="submit" value="REMOVE COUPON">
+        </form>
+    @endif
+    <form class="position-relative bg-body" method="POST" action="{{route('cart.empty')}}">
+        @csrf
+        @method('DELETE')
+        <button class="btn btn-light" type="submit">CLEAR CART</button>
+    </form>
                     <form class="position-relative bg-body" method="POST" action="{{route('cart.empty')}}">
                         @csrf
                         @method('DELETE')
                         <button class="btn btn-light" type="submit">CLEAR CART</button>
                     </form>
-
                 </div>
+            </div>
+            <div>
+                @if (Session::has('success'))
+                    <p class="text-success">{{ Session::get('success') }}</p>
+                @elseif (Session::has('error'))
+                    <p class="text-danger">{{ Session::get('error') }}</p>
+                @endif
             </div>
             <div class="shopping-cart__totals-wrapper">
                 <div class="sticky-content">
                     <div class="shopping-cart__totals">
                         <h3>Cart Totals</h3>
-                       <table class="cart-totals">
-                                <tbody>
-                                    <tr>
-                                        <th>Subtotal</th>
-                                        <td>${{Cart::instance('cart')->subtotal()}}</td>
-                                    </tr>
-                                    <tr>
-                                        <th>SHIPPING</th>
-                                        <td class="text-right">Free</td>
-                                    </tr>
-                                    <tr>
-                                        <th>VAT</th>
-                                        <td>${{Cart::instance('cart')->tax()}}</td>
-                                    </tr>
-                                    <tr class="cart-total">
-                                        <th>Total</th>
-                                        <td>${{Cart::instance('cart')->total()}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        @if(Session::has('discounts'))
+                        <table class="cart-totals">
+                            <tbody>
+                                <tr>
+                                    <th>Subtotal</th>
+                                    <td>${{Cart::instance('cart')->subtotal()}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Discount {{Session("coupon")["code"]}}</th>
+                                    <td>-${{Session("discounts")["discount"]}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Subtotal After Discount</th>
+                                    <td>${{Session("discounts")["subtotal"]}}</td>
+                                </tr>
+                                <tr>
+                                    <th>SHIPPING</th>
+                                    <td class="text-right">Free</td>
+                                </tr>
+                                <tr>
+                                    <th>VAT</th>
+                                    <td>${{Session("discounts")["tax"]}}</td>
+                                </tr>
+                                <tr class="cart-total">
+                                    <th>Total</th>
+                                    <td>${{Session("discounts")["total"]}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @else
+                        <table class="cart-totals">
+                            <tbody>
+                                <tr>
+                                    <th>Subtotal</th>
+                                    <td>${{Cart::instance('cart')->subtotal()}}</td>
+                                </tr>
+                                <tr>
+                                    <th>SHIPPING</th>
+                                    <td class="text-right">Free</td>
+                                </tr>
+                                <tr>
+                                    <th>VAT</th>
+                                    <td>${{Cart::instance('cart')->tax()}}</td>
+                                </tr>
+                                <tr class="cart-total">
+                                    <th>Total</th>
+                                    <td>${{Cart::instance('cart')->total()}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    @endif
+
                     </div>
                     <div class="mobile_fixed-btn_wrapper">
                         <div class="button-wrapper container">
-                            <a href="#" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
+                            <a href="{{route('cart.checkout')}}" class="btn btn-primary btn-checkout">PROCEED TO CHECKOUT</a>
                         </div>
                     </div>
                 </div>
