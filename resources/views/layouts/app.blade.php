@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
       integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw=="
       crossorigin="anonymous" referrerpolicy="no-referrer">
-      @stack('styles')
+      @stack("styles")
 </head>
 <body class="gradient-bg">
     <svg class="d-none">
@@ -259,6 +259,33 @@
       .logo__image {
         max-width: 220px;
       }
+      .product-item{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        gap: 15px;
+        transition: all 0.3s ease;
+        padding-right: 5px;
+      }
+      .product-item .image{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        gap: 10px;
+        flex-shrink: 0;
+        padding: 5px;
+        border-radius: 10px;
+        background: whitesmoke;
+      }
+      #box-content-search li{
+        list-style: none;
+      }
+      #box-content-search .product-item{
+        margin-bottom: 10px;
+      }
+
     </style>
     <div class="header-mobile header_sticky">
       <div class="container d-flex align-items-center h-100">
@@ -270,7 +297,7 @@
         </a>
 
         <div class="logo">
-          <a href="index.html">
+          <a href="{{ route('home.index') }}">
             <img src="{{ asset('assets/images/logo.png') }}" alt="Uomo" class="logo__image d-block" />
           </a>
         </div>
@@ -307,23 +334,23 @@
 
         <div class="container">
           <div class="overflow-hidden">
-            <ul class="navigation__list list-unstyled position-relative">
-              <li class="navigation__item">
-                <a href="index.html" class="navigation__link">Home</a>
-              </li>
-              <li class="navigation__item">
-                <a href="shop.html" class="navigation__link">Shop</a>
-              </li>
-              <li class="navigation__item">
-                <a href="cart.html" class="navigation__link">Cart</a>
-              </li>
-              <li class="navigation__item">
-                <a href="about.html" class="navigation__link">About</a>
-              </li>
-              <li class="navigation__item">
-                <a href="contact.html" class="navigation__link">Contact</a>
-              </li>
-            </ul>
+            <ul class="navigation__list list-unstyled d-flex">
+                <li class="navigation__item">
+                  <a href="{{ route('home.index') }}" class="navigation__link">Home</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="{{ route('shop.index') }}" class="navigation__link">Shop</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="javascript:void(0);" class="navigation__link">About</a>
+                </li>
+                <li class="navigation__item">
+                  <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
+                </li>
+              </ul>
           </div>
         </div>
 
@@ -407,10 +434,10 @@
                 <a href="{{ route('cart.index') }}" class="navigation__link">Cart</a>
               </li>
               <li class="navigation__item">
-                <a href="about.html" class="navigation__link">About</a>
+                <a href="javascript:void(0);" class="navigation__link">About</a>
               </li>
               <li class="navigation__item">
-                <a href="contact.html" class="navigation__link">Contact</a>
+                <a href="{{ route('home.contact') }}" class="navigation__link">Contact</a>
               </li>
             </ul>
           </nav>
@@ -432,7 +459,7 @@
                   <p class="text-uppercase text-secondary fw-medium mb-4">What are you looking for?</p>
                   <div class="position-relative">
                     <input class="search-field__input search-popup__input w-100 fw-medium" type="text"
-                      name="search-keyword" placeholder="Search products" />
+                      name="search-keyword" id="search-input" placeholder="Search products" autocomplete="" />
                     <button class="btn-icon search-popup__submit" type="submit">
                       <svg class="d-block" width="20" height="20" viewBox="0 0 20 20" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
@@ -443,20 +470,7 @@
                   </div>
 
                   <div class="search-popup__results">
-                    <div class="sub-menu search-suggestion">
-                      <h6 class="sub-menu__title fs-base">Quicklinks</h6>
-                      <ul class="sub-menu__list list-unstyled">
-                        <li class="sub-menu__item"><a href="shop2.html" class="menu-link menu-link_us-s">New Arrivals</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Dresses</a></li>
-                        <li class="sub-menu__item"><a href="shop3.html" class="menu-link menu-link_us-s">Accessories</a>
-                        </li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Footwear</a></li>
-                        <li class="sub-menu__item"><a href="#" class="menu-link menu-link_us-s">Sweatshirt</a></li>
-                      </ul>
-                    </div>
-
-                    <div class="search-result row row-cols-5"></div>
+                    <ul id="box-content-search"></ul>
                   </div>
                 </form>
               </div>
@@ -515,7 +529,7 @@
         <div class="row row-cols-lg-5 row-cols-2">
           <div class="footer-column footer-store-info col-12 mb-4 mb-lg-0">
             <div class="logo">
-              <a href="index.html">
+              <a href="javascript:void(0);">
                 <img src="{{ asset('assets/images/logo.png') }}" alt="SurfsideMedia" class="logo__image d-block" />
               </a>
             </div>
@@ -620,7 +634,7 @@
         <div class="container d-md-flex align-items-center">
           <span class="footer-copyright me-auto">©2024 Surfside Media</span>
           <div class="footer-settings d-md-flex align-items-center">
-            <a href="privacy-policy.html">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
+            <a href="javascript:void(0);">Privacy Policy</a> &nbsp;|&nbsp; <a href="terms-conditions.html">Terms &amp;
               Conditions</a>
           </div>
         </div>
@@ -651,7 +665,7 @@
         </div>
 
         <div class="col-4">
-          <a href="index.html" class="footer-mobile__link d-flex flex-column align-items-center">
+          <a href="javascript:void(0);" class="footer-mobile__link d-flex flex-column align-items-center">
             <div class="position-relative">
               <svg class="d-block" width="18" height="18" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -673,7 +687,49 @@
     <script src="{{ asset('assets/js/plugins/bootstrap-slider.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/swiper.min.js') }}"></script>
     <script src="{{ asset('assets/js/plugins/countdown.js') }}"></script>
+    <script>
+        $(function(){
+            $("#search-input").on("keyup", function(){
+              var searchQuery = $(this).val();
+              if(searchQuery.length > 2)
+            {
+              $.ajax({
+                type: "GET",
+                url: "{{ route('home.search') }}",
+                data: {query: searchQuery},
+                dataType: 'json',
+                success: function(data){
+                    $("#box-content-search").html('');
+                    $.each(data,function(index,item){
+                        var url = "{{ route('shop.product.details',['product_slug'=>'product_slug_pls']) }}";
+                        var link = url.replace('product_slug_pls',item.slug);
+                        $("#box-content-search").append(`
+                        <li>
+                            <ul>
+                                <li class="product-item gap14 mb-10">
+                                    <div class="image no bg">
+                                        <img src="{{asset('uploads/products/thumbnails')}}/${item.image}" alt="${item.name}">
+                                        </div>
+                                        <div class="flex item-center justify-between gap20 flex-grow">
+                                            <div class="name">
+                                                <a href="${link}" class="body-text">${item.name}</a>
+                                                </div>
+                                            </div>
+                                    </li>
+                                    <li class="mb-10">
+                                        <div class="divider"></div>
+                                        </li>
+                                </ul>
+                            </li>
+                        `);
+                    });
+                }
+              });
+            }
+            });
+        });
+    </script>
     <script src="{{ asset('assets/js/theme.js') }}"></script>
-    @stack('scripts')
+    @stack("scripts")
   </body>
 </html>

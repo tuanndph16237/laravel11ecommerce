@@ -94,19 +94,19 @@
                         <table class="table table-striped table-bordered table-transaction">
                             <tr>
                                 <th>Order No</th>
-                                <td>{{$order->id}}</td>
+                                <td>{{$transaction->order->id}}</td>
                                 <th>Mobile</th>
-                                <td>{{$order->phone}}</td>
+                                <td>{{$transaction->order->phone}}</td>
                                 <th>Pin/Zip Code</th>
-                                <td>{{$order->zip}}</td>
+                                <td>{{$transaction->order->zip}}</td>
                             </tr>
                             <tr>
                                 <th>Order Date</th>
-                                <td>{{$order->created_at}}</td>
+                                <td>{{$transaction->order->created_at}}</td>
                                 <th>Delivered Date</th>
-                                <td>{{$order->delivered_date}}</td>
+                                <td>{{$transaction->order->delivered_date}}</td>
                                 <th>Canceled Date</th>
-                                <td>{{$order->canceled_date}}</td>
+                                <td>{{$transaction->order->canceled_date}}</td>
                             </tr>
                             <tr>
                                 <th>Order Status</th>
@@ -193,14 +193,14 @@
                     <h5>Shipping Address</h5>
                     <div class="my-account__address-item col-md-6">
                         <div class="my-account__address-item__detail">
-                            <p>{{$order->name}}</p>
-                            <p>{{$order->address}}</p>
-                            <p>{{$order->locality}}</p>
-                            <p>{{$order->city}}, {{$order->country}}</p>
-                            <p>{{$order->landmark}}</p>
-                            <p>{{$order->zip}}</p>
+                            <p>{{$transaction->order->name}}</p>
+                            <p>{{$transaction->order->address}}</p>
+                            <p>{{$transaction->order->locality}}</p>
+                            <p>{{$transaction->order->city}}, {{$transaction->order->country}}</p>
+                            <p>{{$transaction->order->landmark}}</p>
+                            <p>{{$transaction->order->zip}}</p>
                             <br />
-                            <p>Mobile : {{$order->phone}}</p>
+                            <p>Mobile : {{$transaction->order->phone}}</p>
                         </div>
                     </div>
                 </div>
@@ -211,15 +211,15 @@
                     <table class="table table-striped table-bordered table-transaction">
                         <tr>
                             <th>Subtotal</th>
-                            <td>${{$order->subtotal}}</td>
+                            <td>${{$transaction->order->subtotal}}</td>
                             <th>Tax</th>
-                            <td>${{$order->tax}}</td>
+                            <td>${{$transaction->order->tax}}</td>
                             <th>Discount</th>
-                            <td>${{$order->discount}}</td>
+                            <td>${{$transaction->order->discount}}</td>
                         </tr>
                         <tr>
                             <th>Total</th>
-                            <td>${{$order->total}}</td>
+                            <td>${{$transaction->order->total}}</td>
                             <th>Payment Mode</th>
                             <td>{{$transaction->mode}}</td>
                             <th>Status</th>

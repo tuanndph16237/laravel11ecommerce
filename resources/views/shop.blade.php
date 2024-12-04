@@ -209,67 +209,25 @@
           }'>
           <div class="swiper-wrapper">
             <div class="swiper-slide">
-              <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
-                <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
-                  <div class="slideshow-text container p-3 p-xl-5">
-                    <h2
-                      class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
+                  <div class="slide-split_text position-relative d-flex align-items-center"
+                    style="background-color: #f5e6e0;">
+                    <div class="slideshow-text container p-3 p-xl-5">
+                      <h2
+                        class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
+                        Women's <br /><strong>ACCESSORIES</strong></h2>
+                      <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
+                        update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
+                    </div>
                   </div>
-                </div>
-                <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                      alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
-                <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
-                  <div class="slideshow-text container p-3 p-xl-5">
-                    <h2
-                      class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
-                  </div>
-                </div>
-                <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                      alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
+                  <div class="slide-split_media position-relative">
+                    <div class="slideshow-bg" style="background-color: #f5e6e0;">
+                      <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
+                        alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
+                    </div>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div class="swiper-slide">
-              <div class="slide-split h-100 d-block d-md-flex overflow-hidden">
-                <div class="slide-split_text position-relative d-flex align-items-center"
-                  style="background-color: #f5e6e0;">
-                  <div class="slideshow-text container p-3 p-xl-5">
-                    <h2
-                      class="text-uppercase section-title fw-normal mb-3 animate animate_fade animate_btt animate_delay-2">
-                      Women's <br /><strong>ACCESSORIES</strong></h2>
-                    <p class="mb-0 animate animate_fade animate_btt animate_delay-5">Accessories are the best way to
-                      update your look. Add a title edge with new styles and new colors, or go for timeless pieces.</h6>
-                  </div>
-                </div>
-                <div class="slide-split_media position-relative">
-                  <div class="slideshow-bg" style="background-color: #f5e6e0;">
-                    <img loading="lazy" src="assets/images/shop/shop_banner3.jpg" width="630" height="450"
-                      alt="Women's accessories" class="slideshow-bg__img object-fit-cover" />
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
           <div class="container p-3 p-xl-5">
@@ -294,13 +252,13 @@
                 <option value="48" {{$size=='48'? 'selected':''}}>48</option>
                 <option value="102" {{$size=='102'? 'selected':''}}>102</option>
             </select>
-            <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Sort Items" name="orderby" id="orderby">
-                <option value="-1" {{$order=='-1'? 'selected':''}}>Default</option>
-                <option value="1" {{$order=='1'? 'selected':''}}>Date, New to Old</option>
-                <option value="2" {{$order=='2'? 'selected':''}}>Date, Old to new</option>
-                <option value="3" {{$order=='3'? 'selected':''}}>price: low to high</option>
-                <option value="4" {{$order=='4'? 'selected':''}}>price: high to low</option>
-            </select>
+
+                <select class="shop-acs__select form-select w-auto border-0 py-0 order-1 order-md-0" aria-label="Sort Items" id="sorting" name="sorting">
+                    <option value="default" {{$sorting=='default'? 'selected':''}}>Default Sorting</option>
+                    <option value="date" {{$sorting=='date'? 'selected':''}}>Sort by newness</option>
+                    <option value="price"{{$sorting=='price'? 'selected':''}}>Sort by price: low to high</option>
+                    <option value="price-desc" {{$sorting=='price-desc'? 'selected':''}}>Sort by price: high to low</option>
+                </select>
 
             <div class="shop-asc__seprator mx-3 bg-light d-none d-md-block order-md-0"></div>
 
@@ -440,7 +398,7 @@
   <form id="frmfilter" method="GET" action="{{ route('shop.index') }}">
     <input type="hidden" name="page" value="{{ $products->currentPage() }}">
     <input type="hidden" name="size" id="size" value="{{ $size }}">
-    <input type="hidden" name="order" id="order" value ="{{ $order }}" />
+    <input type="hidden" name="sorting" id="sorting" value ="{{ $sorting }}" />
     <input type="hidden" name="brands" id="hdnBrands" />
     <input type="hidden" name="categories" id="hdnCategories" />
     <input type="hidden" name="min" id="hdnMinPrice" value="{{ $min_price }}" />
@@ -456,8 +414,8 @@
            $("#frmFilter").submit();
        });
 
-    $("#orderby").on("change",function(){
-        $("#order").val($("#orderby option:selected").val());
+    $("#sorting").on("change",function(){
+        $("#sorting").val($("#sorting option:selected").val());
         $("#frmFilter").submit();
     });
 
@@ -498,9 +456,7 @@
         console.log(max);
      $("#hdnMinPrice").val(min);
      $("#hdnMaxPrice").val(max);
-    // setTimeout(() => {
-      //  $("#frmfilter").submit();
-     //}, 2000);
+     $("#frmfilter").submit();
     });
 
 });
