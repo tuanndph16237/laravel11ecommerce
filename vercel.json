@@ -2,16 +2,16 @@
     "version": 2,
       "framework": null,
     "functions": {
-        "api/index.php": { "runtime": "vercel-php@0.3.1" }
+        "api/index.php": { "runtime": "vercel-php@0.6.0" }
     },
-"routes": [
-        { "src": "/build/(.*)", "dest": "/public/build/" },
-        { "src": "/(.*)", "dest": "/api/index.php" }
-    ],
+    "routes": [{
+        "src": "/(.*)",
+        "dest": "/api/index.php"
+    }],
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://yourproductionurl.com",
+        "APP_URL": "https://yourprojectdomain.com",
         "APP_KEY": "base64:i4mvCqymxeZUHg3k2bEgXHnQS2tCr36trrWs7rfX3cY=",
 
         "APP_CONFIG_CACHE": "/tmp/config.php",
