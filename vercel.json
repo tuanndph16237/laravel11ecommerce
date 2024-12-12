@@ -11,7 +11,7 @@
     "env": {
         "APP_ENV": "production",
         "APP_DEBUG": "true",
-        "APP_URL": "https://yourprojectdomain.com",
+        "APP_URL": "https://laravel11ecommerce.vercel.app",
         "APP_KEY": "base64:i4mvCqymxeZUHg3k2bEgXHnQS2tCr36trrWs7rfX3cY=",
         "DB_CONNECTION": "mysql",
         "DB_HOST": "127.0.0.1",
